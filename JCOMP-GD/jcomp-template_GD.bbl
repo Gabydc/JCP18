@@ -1,0 +1,195 @@
+\begin{thebibliography}{27}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{{P.T.M. Vermeulen, A.W. Heemink and C.B.M. Te
+  Stroet}(2004)}]{Vermeulen04}
+\bibinfo{author}{{P.T.M. Vermeulen, A.W. Heemink and C.B.M. Te Stroet}},
+\newblock \bibinfo{title}{{Reduced models for linear groundwater flow models
+  using empirical orthogonal functions.}},
+\newblock \bibinfo{journal}{Advances in Water Resources} \bibinfo{volume}{27}
+  (\bibinfo{year}{2004}) \bibinfo{pages}{57--69}.
+%Type = Article
+\bibitem[{{D. Pasetto, M. Ferronato and M. Putti}(2017)}]{Pasetto16}
+\bibinfo{author}{{D. Pasetto, M. Ferronato and M. Putti}},
+\newblock \bibinfo{title}{{A reduced order model-based preconditioner for the
+  efficient solution of transient diffusion equations}},
+\newblock \bibinfo{journal}{{International Journal for Numerical Methods in
+  Engineering}} \bibinfo{volume}{{109}} (\bibinfo{year}{{2017}})
+  \bibinfo{pages}{{1159--1179}}.
+%Type = Book
+\bibitem[{{W. Schilders, H. Van der Vorst and J. Rommes}(2008)}]{Schilders08}
+\bibinfo{author}{{W. Schilders, H. Van der Vorst and J. Rommes}},
+  \bibinfo{title}{{Model order reduction: theory, research aspects and
+  applications}}, volume~\bibinfo{volume}{{13}},
+  \bibinfo{publisher}{{Springer}}, \bibinfo{year}{{2008}}.
+%Type = Book
+\bibitem[{{A. Quarteroni and G. Rozza}(2014)}]{Quarteroni14}
+\bibinfo{author}{{A. Quarteroni and G. Rozza}}, \bibinfo{title}{{Reduced order
+  methods for modeling and computational reduction}},
+  volume~\bibinfo{volume}{{9}}, \bibinfo{publisher}{{Springer}},
+  \bibinfo{year}{{2014}}.
+%Type = Article
+\bibitem[{{K. Carlberg, V. Forstall and R. Tuminaro}(2016)}]{Carlberg15}
+\bibinfo{author}{{K. Carlberg, V. Forstall and R. Tuminaro}},
+\newblock \bibinfo{title}{{Krylov-subspace recycling via the POD-augmented
+  conjugate-gradient method}},
+\newblock \bibinfo{journal}{{SIAM Journal on Matrix Analysis and Applications}}
+  \bibinfo{volume}{{37}} (\bibinfo{year}{{2016}})
+  \bibinfo{pages}{{1304--1336}}.
+%Type = Inproceedings
+\bibitem[{{P. Astrid, G. Papaioannou, J.C. Vink and J.D.
+  Jansen}(2011)}]{Astrid11}
+\bibinfo{author}{{P. Astrid, G. Papaioannou, J.C. Vink and J.D. Jansen}},
+\newblock \bibinfo{title}{{Pressure Preconditioning Using Proper Orthogonal
+  Decomposition.}},
+\newblock in: \bibinfo{booktitle}{{2011 SPE Reservoir Simulation Symposium, The
+  Woodlands, Texas, USA}}, \bibinfo{year}{2011}, pp. \bibinfo{pages}{21--23}.
+%Type = Article
+\bibitem[{{R. Markovinovi{\'c} and J.D. Jansen}(2006)}]{Mark06}
+\bibinfo{author}{{R. Markovinovi{\'c} and J.D. Jansen}},
+\newblock \bibinfo{title}{{Accelerating iterative solution methods using
+  reduced-order models as solution predictors.}},
+\newblock \bibinfo{journal}{International journal for numerical methods in
+  engineering} \bibinfo{volume}{68} (\bibinfo{year}{2006})
+  \bibinfo{pages}{525--541}.
+%Type = Article
+\bibitem[{{M.A. Cardoso, L.J. Durlofsky and P. Sarma}(2009)}]{Cardoso09}
+\bibinfo{author}{{M.A. Cardoso, L.J. Durlofsky and P. Sarma}},
+\newblock \bibinfo{title}{{Development and application of reduced-order
+  modeling procedures for subsurface flow simulation}},
+\newblock \bibinfo{journal}{{International journal for numerical methods in
+  engineering}} \bibinfo{volume}{{77}} (\bibinfo{year}{{2009}})
+  \bibinfo{pages}{{1322--1350}}.
+%Type = Article
+\bibitem[{{T. Heijn, R. Markovinovic, J.D. Jansen et al.}(2004)}]{Heijn04}
+\bibinfo{author}{{T. Heijn, R. Markovinovic, J.D. Jansen et al.}},
+\newblock \bibinfo{title}{{Generation of low-order reservoir models using
+  system-theoretical concepts}},
+\newblock \bibinfo{journal}{SPE Journal} \bibinfo{volume}{9}
+  (\bibinfo{year}{2004}) \bibinfo{pages}{202--218}.
+%Type = Article
+\bibitem[{{J. van Doren, R. Markovinovi{\'c} and J.D. Jansen}(2006)}]{Doren06}
+\bibinfo{author}{{J. van Doren, R. Markovinovi{\'c} and J.D. Jansen}},
+\newblock \bibinfo{title}{{Reduced-order optimal control of water flooding
+  using proper orthogonal decomposition}},
+\newblock \bibinfo{journal}{{Computational Geosciences}} \bibinfo{volume}{{10}}
+  (\bibinfo{year}{{2006}}) \bibinfo{pages}{{137--158}}.
+%Type = Article
+\bibitem[{{G.B. Diaz Cortes, C. Vuik and J.D. Jansen}(2018)}]{Diaz17}
+\bibinfo{author}{{G.B. Diaz Cortes, C. Vuik and J.D. Jansen}},
+\newblock \bibinfo{title}{{On POD-based Deflation Vectors for DPCG applied to
+  porous media problems}},
+\newblock \bibinfo{journal}{{Journal of Computational and Applied Mathematics}}
+  \bibinfo{volume}{{330}} (\bibinfo{year}{{2018}}) \bibinfo{pages}{{193 --
+  213}}.
+%Type = Book
+\bibitem[{Saad(2003)}]{Saad03}
+\bibinfo{author}{Y.~Saad}, \bibinfo{title}{{Iterative Methods for Sparse Linear
+  Systems.}}, Society for Industrial and Applied Mathematics Philadelphia, PA,
+  USA, \bibinfo{edition}{2nd} ed., \bibinfo{publisher}{SIAM},
+  \bibinfo{year}{2003}.
+%Type = Book
+\bibitem[{{H.A. Van der Vorst}(2003)}]{vanderVorst03}
+\bibinfo{author}{{H.A. Van der Vorst}}, \bibinfo{title}{{Iterative Krylov
+  methods for large linear systems}}, volume~\bibinfo{volume}{{13}},
+  \bibinfo{publisher}{{Cambridge University Press}}, \bibinfo{year}{{2003}}.
+%Type = Article
+\bibitem[{{H.A. Van der Vorst, C. Dekker}(1988)}]{vanderVorst88}
+\bibinfo{author}{{H.A. Van der Vorst, C. Dekker}},
+\newblock \bibinfo{title}{{Conjugate gradient type methods and
+  preconditioning}},
+\newblock \bibinfo{journal}{{Journal of Computational and Applied Mathematics}}
+  \bibinfo{volume}{{24}} (\bibinfo{year}{{1988}}) \bibinfo{pages}{{73--87}}.
+%Type = Article
+\bibitem[{{C. Vuik, A. Segal and J.A. Meijerink}(1999)}]{Vuik99}
+\bibinfo{author}{{C. Vuik, A. Segal and J.A. Meijerink}},
+\newblock \bibinfo{title}{{An Efficient Preconditioned CG Method for the
+  Solution of a Class of Layered Problems with Extreme Contrasts in the
+  Coefficients.}},
+\newblock \bibinfo{journal}{Journal of Computational Physics}
+  \bibinfo{volume}{152} (\bibinfo{year}{1999}) \bibinfo{pages}{385}.
+%Type = Article
+\bibitem[{{C. Vuik, A. Segal, L. Yaakoubi and E. Dufour}(2002)}]{Vuik02}
+\bibinfo{author}{{C. Vuik, A. Segal, L. Yaakoubi and E. Dufour}},
+\newblock \bibinfo{title}{{A comparison of various deflation vectors applied to
+  elliptic problems with discontinuous coefficients.}},
+\newblock \bibinfo{journal}{Applied Numerical Mathematics} \bibinfo{volume}{41}
+  (\bibinfo{year}{2002}) \bibinfo{pages}{219--233}.
+%Type = Article
+\bibitem[{{J.M. Tang, R. Nabben, C. Vuik and Y. Erlangga}(2009)}]{Tang09}
+\bibinfo{author}{{J.M. Tang, R. Nabben, C. Vuik and Y. Erlangga}},
+\newblock \bibinfo{title}{{Comparison of two-level preconditioners derived from
+  deflation, domain decomposition and multigrid methods}},
+\newblock \bibinfo{journal}{Journal of scientific computing}
+  \bibinfo{volume}{39} (\bibinfo{year}{2009}) \bibinfo{pages}{340--370}.
+%Type = Article
+\bibitem[{{M. Benzi}(2002)}]{Benzi02}
+\bibinfo{author}{{M. Benzi}},
+\newblock \bibinfo{title}{{Preconditioning techniques for large linear systems:
+  a survey}},
+\newblock \bibinfo{journal}{{Journal of computational Physics}}
+  \bibinfo{volume}{{182}} (\bibinfo{year}{{2002}}) \bibinfo{pages}{{418--477}}.
+%Type = Article
+\bibitem[{{J. Tang and C. Vuik}(2007)}]{Tang07}
+\bibinfo{author}{{J. Tang and C. Vuik}},
+\newblock \bibinfo{title}{{On deflation and singular symmetric positive
+  semi-definite matrices}},
+\newblock \bibinfo{journal}{{Journal of computational and applied mathematics}}
+  \bibinfo{volume}{{206}} (\bibinfo{year}{{2007}}) \bibinfo{pages}{{603--614}}.
+%Type = Phdthesis
+\bibitem[{Tang(2008)}]{Tang08}
+\bibinfo{author}{J.~Tang}, \bibinfo{title}{{Two-Level Preconditioned Conjugate
+  Gradient Methods with Applications to Bubbly Flow Problems}}, Ph.D. thesis,
+  Delft University of Technology, \bibinfo{year}{2008}.
+%Type = Book
+\bibitem[{{K.A. Lie}(2013)}]{Lie13}
+\bibinfo{author}{{K.A. Lie}}, \bibinfo{title}{{An Introduction to Reservoir
+  Simulation Using MATLAB: User guide for the Matlab Reservoir Simulation
+  Toolbox (MRST).}}, \bibinfo{publisher}{SINTEF ICT}, \bibinfo{year}{2013}.
+%Type = Book
+\bibitem[{{K. Aziz and A. Settari}(1979)}]{Aziz79}
+\bibinfo{author}{{K. Aziz and A. Settari}}, \bibinfo{title}{{Petroleum
+  reservoir simulation}}, \bibinfo{publisher}{{Chapman \& Hall}},
+  \bibinfo{year}{{1979}}.
+%Type = Book
+\bibitem[{{Z. Chen, G. Huan and Y. Ma}(2006)}]{Chen06}
+\bibinfo{author}{{Z. Chen, G. Huan and Y. Ma}}, \bibinfo{title}{{Computational
+  methods for multiphase flows in porous media}}, \bibinfo{publisher}{{SIAM}},
+  \bibinfo{year}{{2006}}.
+%Type = Book
+\bibitem[{{J.D. Jansen}(2013)}]{Jansen13}
+\bibinfo{author}{{J.D. Jansen}}, \bibinfo{title}{{A systems description of flow
+  through porous media.}}, \bibinfo{publisher}{Springer}, \bibinfo{year}{2013}.
+%Type = Techreport
+\bibitem[{{G.B. Diaz Cortes, C. Vuik and J.D. Jansen}(2016)}]{Diaz16}
+\bibinfo{author}{{G.B. Diaz Cortes, C. Vuik and J.D. Jansen}},
+  \bibinfo{title}{{Physics-based pre-conditioners for large-scale subsurface
+  flow simulation}}, \bibinfo{type}{Technical Report}, {Delft University of
+  Technology, Department of Applied Mathematics}, \bibinfo{year}{{2016}}.
+%Type = Article
+\bibitem[{{M. Clemens, M. Wilke, R. Schuhmann and T.
+  Weiland}(2004)}]{Clemens04}
+\bibinfo{author}{{M. Clemens, M. Wilke, R. Schuhmann and T. Weiland}},
+\newblock \bibinfo{title}{{Subspace projection extrapolation scheme for
+  transient field simulations.}},
+\newblock \bibinfo{journal}{IEEE Transactions on Magnetics}
+  \bibinfo{volume}{40} (\bibinfo{year}{2004}) \bibinfo{pages}{934--937}.
+%Type = Book
+\bibitem[{{B. Smith, P. Bjorstad and W. Gropp}(1996)}]{Smith96}
+\bibinfo{author}{{B. Smith, P. Bjorstad and W. Gropp}}, \bibinfo{title}{{Domain
+  decomposition: parallel multilevel methods for elliptic partial differential
+  equations.}}, \bibinfo{publisher}{Cambridge University Press New York},
+  \bibinfo{year}{1996}.
+
+\end{thebibliography}

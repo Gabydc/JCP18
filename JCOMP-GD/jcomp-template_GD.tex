@@ -1,0 +1,489 @@
+%% This is file `jcomp-template.tex',
+%% 
+%% Copyright 2017 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+%%
+%% $Id: jcomp-template.tex 100 2017-07-14 13:15:12Z rishi $
+%%
+%% Use the option review to obtain double line spacing
+%\documentclass[times,review,preprint,authoryear]{elsarticle}
+
+%% Use the options `twocolumn,final' to obtain the final layout
+%% Use longtitle option to break abstract to multiple pages if overfull.
+%% For Review pdf (With double line spacing)
+%\documentclass[times,twocolumn,review]{elsarticle}
+%% For abstracts longer than one page.
+%\documentclass[times,twocolumn,review,longtitle]{elsarticle}
+%% For Review pdf without preprint line
+%\documentclass[times,twocolumn,review,nopreprintline]{elsarticle}
+%% Final pdf
+\documentclass[times,final]{elsarticle}
+%%
+%\documentclass[times,twocolumn,final,longtitle]{elsarticle}
+%%
+
+
+%% Stylefile to load JCOMP template
+\usepackage{jcomp}
+\usepackage{framed,multirow}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{float}
+\usepackage[font=footnotesize]{caption}
+\usepackage{wrapfig}
+\usepackage{subfigure}
+
+
+
+\usepackage{amssymb}
+
+
+
+% Following three lines are needed for this document.
+% If you are not loading colors or url, then these are
+% not required.
+\usepackage{url}
+\usepackage{xcolor}
+\definecolor{newcolor}{rgb}{.8,.349,.1}
+
+\journal{Journal of Computational Physics}
+
+\begin{document}
+
+\verso{G. Diaz \textit{ et al.}}
+
+\begin{frontmatter}
+
+\title{Accelerating the solution of linear systems with POD-based deflation methods\tnoteref{tnote1}}%
+\tnotetext[tnote1]{This is an example for title footnote coding.}
+
+\author[1]{Gabriela B.  \snm{Diaz Cortes}\corref{cor1}}
+\cortext[cor1]{Corresponding author: 
+  Tel.: +31 (0) 152787290; } \ead{g.b.diazcortes@tudelft.nl}
+  %fax: +0-000-000-0000;}
+\author[1]{Cornelis  \snm{Vuik}\fnref{fn1}}
+%\fntext[fn1]{This is author footnote for second author.}  
+\author[2]{Jan Dirk \snm{Jansen}}
+
+
+\address[1]{Delft University of Technology,
+Faculty of Electrical Engineering, Mathematics and Computer Science, Van Mourik Broekmanweg 6, 2628 XE Delft, the Netherlands.}
+\address[2]{Delft University of Technology, Faculty of Civil Engineering and Geosciences,
+Stevinweg 1, 2628 CN Delft, the Netherlands.}
+
+% \received{1 May 2013}
+% \finalform{10 May 2013}
+% \accepted{13 May 2013}
+% \availableonline{15 May 2013}
+% \communicated{S. Sarkar}
+
+
+\begin{abstract}
+%%%
+We explore and develop a POD-based deflation methodology for the solution of ill-conditioned linear systems appearing in two-phase flow simulations. We accelerated the convergence of a Preconditioned Conjugate Gradient (PCG) achieving speed-ups of factors two to five. The computational cost of the proposed method depends on the number of deflation vectors, $p$, as $1+\frac{p}{10}$. 
+ The POD-based deflation method was tested for a particular problem and linear solver; nevertheless, it can be applied to various transient 
+ problems, and multiple solvers, e.g., Krylov subspace and Multigrid methods. 
+
+%%%%
+\end{abstract}
+
+%\begin{keyword}
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+%\MSC 41A05\sep 41A10\sep 65D05\sep 65D17
+%% Keywords
+%\KWD Keyword1\sep Keyword2\sep Keyword3
+%\end{keyword}
+
+\end{frontmatter}
+
+%\linenumbers
+
+%% main text
+
+\section{Introduction}\label{intro}
+\hspace{0.5cm}Solution of systems of linear equations are required when 
+simulating flow through porous media.
+Solving the pressure equation is the most time-consuming part, especially for large and 
+ill-conditioned systems. Furthermore, if we have a time-varying problem, it is required 
+to compute a large number of simulations, which makes the solution of this problem expensive.
+Some techniques have been developed to improve the linear solver speed.\par 
+Among others,
+Reduced Order Models (ROM) are used to capture 
+relevant information of a high-dimensional system and to project it into a lower-dimension 
+space \cite{Vermeulen04,Pasetto16,Schilders08,Quarteroni14,Carlberg15}, which is easier to solve. 
+With these methods, essential system information can be obtained by computing a small set of basis 
+functions from a collection of system solutions (also known as 'snapshots'). 
+Proper Orthogonal Decomposition (POD) is an ROM method that has recently been used to  
+accelerate the solution of the linear pressure equation resulting from reservoir simulation 
+\cite{Astrid11,Mark06,Cardoso09,Heijn04,Doren06}, among other applications. \par
+For the computation of the POD basis, two main approaches are used. In the first one, a training 
+simulation is run and the solutions are stored as snapshots, which are collected to obtain a POD basis. This methodology is
+especially suited to solve problems with small changes in the input variables, e.g.
+the same well configurations but different flow rates or bottom hole pressures (\emph{bhp}) \cite{Heijn04,Astrid11,Cardoso09}. 
+The basis can also be computed on-the-fly, using, e.g., the solution of the latest time steps \cite{Mark06,Astrid11,Diaz17}. With this approach, the basis has to be adapted during the simulation. \par
+Once the basis is obtained, various POD-based strategies can be used to solve the system.
+In the future, we will refer to the fist approach as \emph{training phase} approach, and the second as \emph{moving window} approach.
+For the 
+solution of a large-scale system, Markovinovic et al. \cite{Mark06} proposed using POD techniques to compute a good 
+initial guess that accelerates the iterative method. Solving the problem in the small-scale domain 
+and projecting it back to the large-scale system
+was also approached by Astrid et al. \cite{Astrid11}. Another approach was developed by Pasetto et 
+al. \cite{Pasetto16}, who suggested constructing a preconditioner based on the POD basis vectors. The use of the POD basis 
+within a deflation operator was introduced by Diaz Cortes et al. \cite{Diaz17}.\par
+For many applications, Krylov subspace iterative
+methods are used \cite{Saad03,vanderVorst03}\footnote{Given a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, and the initial 
+residual $\mathbf{r}^0=\mathbf{b}-\mathbf{A}\mathbf{x}^0$, with $\mathbf{x}^0$ an initial guess of $\mathbf{x}$, we define the Krylov subspace as
+$\mathcal{K}_k(\mathbf{A},\mathbf{r}^0)=span\{\mathbf{r}^0,\mathbf{A}\mathbf{r}^0,\dots,\mathbf{A}^{k-1}\mathbf{r}^0\}$. 
+That is, the set of linear combinations of powers of $\mathbf{A}$ times $\mathbf{r}^0$. }. The speed of convergence of these 
+methods depends on the condition number and the right-hand side (\emph{rhs}) of the system. If the condition 
+number is very large, generally, preconditioning techniques are needed to transform the original system into a 
+better conditioned one. If the system is Symmetric Positive (Semi) Definite (SP(S)D), a commonly used Krylov-subspace method is the 
+Conjugate Gradient (CG) \cite{vanderVorst88,Vuik99,Vuik02,Tang09,Carlberg15}. For CG, the Incomplete Cholesky (IC) factorization is a popular preconditioning 
+choice \cite{vanderVorst88,Benzi02}.\par 
+In recent years, deflation techniques have been developed to accelerate the convergence of
+Krylov subspace methods \cite{Vuik99,Vuik02,Tang07,Tang08,Tang09}. For this technique to be effective, a deflation subspace needs to be found. This subspace is such that the smallest eigenvalues of the 
+system are no longer hampering the convergence of the iterative method. \par
+In this work, we introduce the capture of information via POD methods with a \emph{training phase} and a \emph{moving window} 
+approach. The acquired information is used for the construction of the above-mentioned deflation subspace.
+We explore the applicability of this methodology for the simulation of two-phase flow in large-scale, highly-heterogeneous porous media. \par
+
+In Section \ref{sec:1}, we present the governing equations used for the simulation of a two-phase flow problem. In Section \ref{sec:2}, we describe the models used in this work. Later, in 
+Section \ref{sec:3}, we give a brief overview of the methods we use to solve the linear systems. 
+Section \ref{sec:4} is devoted to the numerical experiments, where we give some examples and 
+present some results. Finally, we formulate the conclusions.\par
+
+\section{Two phase flow through porous media}
+\label{sec:1}
+\hspace{0.5cm} For simulation of two-phase flow through a porous medium, we can consider the phases as separated, i.e., they are immiscible and there is no mass transfer between them. The contact area between the phases is known as interface. We 
+usually consider one of the fluids as the wetting phase ($w$), which is more attracted to the mineral particles than the other phase, known as non-wetting phase ($nw$). In the case of a water-oil system, water is considered
+the wetting phase. \par
+
+The saturation of a phase $(S_{\alpha})$ is the fraction of void space filled with that phase in the 
+medium, where a zero saturation indicates that the phase is not present.
+Fluids inside a reservoir are usually filling completely the empty space, this property is expressed by the following relation for a two-phase system,
+\begin{equation}\label{eq:satrel}
+ S_{nw}+S_w=1.
+\end{equation}\par
+The surface tension and the curvature of the interface between the fluids causes a difference in pressure
+between the two phases. 
+% The pressure in the wetting fluid is less than in the nonwetting fluid. 
+This difference is known as the capillary pressure ($p_c$) which depends on the saturation:
+\begin{equation}\label{eq:cappress}
+ p_c(S_w)=p_{nw}-p_w.
+\end{equation}
+The pressure of the non-wetting fluid is higher than the pressure of the wetting fluid; therefore, the capillary pressure is always a positive quantity. 
+The relation between the capillary pressure and the saturation is an empirical model based on experiments. 
+The capillary curve depends on the difference in pore-size 
+distributions, porosity, and permeability of the medium.\par
+When modeling two-phase flow, the permeability of each phase, $\alpha$, will be affected by the presence of the other phase. Therefore, an effective permeability $K_\alpha$ has to be used instead of the absolute permeability $K$.  
+The absolute and effective permeabilities are realted via the relative permeability, defined as:
+\begin{equation}\label{eq:relperm}
+    k_{r\alpha}(S_{\alpha})=K_{\alpha}^e/K,
+\end{equation}
+that depends on the saturation, the Corey model gives a relation between these two quatities:
+\begin{equation}\label{eq:Corey}
+k_{rw}=(\hat{S}_w)^{n_w}k_w^0, \qquad
+k_{rnw}=(1-\hat{S}_w)^{n_{nw}}k_{nw}^0.
+\end{equation}
+where $n_w>1$, $n_{nw}>1$ and $k_{\alpha}^0$ are fitting parameters.\par
+As in the single-phase case, the governing equations for two-phase flow in a porous medium are the mass conservation principle and Darcy's law. 
+The mass balance equation for a phase $\alpha$ is given by:
+\begin{equation}\label{eq:mb2ph}
+ \frac{\partial(\phi \rho_{\alpha}S_{\alpha})}{\partial t}+\nabla \cdot ( \rho_{\alpha} \mathbf{v}_{\alpha})=\rho_{\alpha} q_{\alpha},
+\end{equation}
+and the Darcy's law reads:
+\begin{equation}\label{eq:D2ph}
+\mathbf{v}_{\alpha}=-\frac{k_{r\alpha}}{\mu_{\alpha}} {K}(\nabla p_{\alpha}-\rho_{\alpha} g \nabla d),
+\end{equation}
+where $\rho_{\alpha}$, $\mu_{\alpha}$, $q_{\alpha}$ and $p_{\alpha}$ are the density, viscosity, sources and pressure of each phase, $g$ is the gravity constant, and $d$ is the depth of the reservoir.   \par
+To simplify notation, we introduce the phase mobilities 
+\begin{equation}\label{eq:phm}
+ \lambda_{\alpha}(S_{\alpha})=\frac{Kk_{r\alpha}(S_{\alpha})}{\mu_{\alpha}}.
+\end{equation}
+Combining Darcy's law \eqref{eq:D2ph}, the mass balance equation \eqref{eq:mb2ph} and using the phase mobilities, the system reads:
+\begin{equation}\label{eq:2ph}
+ \frac{\partial(\phi \rho_{\alpha}S_{\alpha})}{\partial t}-\nabla \cdot ( \rho_{\alpha} \lambda_{\alpha}(\nabla p_{\alpha}-\rho_{\alpha} g \nabla d))=\rho_{\alpha} q_{\alpha},
+\end{equation}
+which is a parabolic equation for pressures and saturations. \par 
+The previously-mentioned equations can be separated into a pressure equation and a saturation or transport equation via the fractional flow formulation. For an immiscible, incompressible flow, the pressure equation becomes elliptic and the transport equation becomes hyperbolic. With this formulation, the pressure and transport equations are solved in separate steps in a sequential procedure.
+In the next subsection we describe in more detail this formulation.
+\subsection{Fractional flow formulation}
+\hspace{0.5cm}In the case of incompressible flow, the porosity $\phi$ and the densities $\rho_{\alpha}$ do not depend on the pressure. Therefore, Equation \eqref{eq:2ph} reduces to: 
+\begin{equation}\label{eq:2ph1}
+ \phi \frac{\partial S_{\alpha}}{\partial t}-\nabla \cdot (  \lambda_{\alpha}(\nabla p_{\alpha}-\rho_{\alpha}g \nabla d))= q_{\alpha}.
+\end{equation}
+Considering a two-phase system with a wetting (w) and a non wetting phase (nw), we need to solve Equation \eqref{eq:2ph} for each phase. 
+To solve it, we define the total Darcy's velocity as the sum of the velocity in both phases:
+\begin{align}\label{eq:totv}
+\mathbf{v}=&\mathbf{v}_w+\mathbf{v}_{nw}=-(\lambda_{nw}+\lambda_w)\nabla p_{nw}+\lambda_w\nabla p_c+(\lambda_{nw} \rho_{nw}+\lambda_w\rho_w)g\nabla d.
+\end{align}
+If we add the two continuity equations, together with Equation \eqref{eq:satrel} we obtain:
+\begin{align}\label{eq:v2ph}
+& \phi\frac{\partial( {S}_{w}+S_{nw})}{\partial t}+\nabla \cdot ( \mathbf{v}_{w}+\mathbf{v}_{nw})=  \nabla \cdot \mathbf{v}=q, 
+\end{align}
+where $q=q_{nw}+q_w$ is the total source term. Defining the total mobility as $\lambda=\lambda_{nw}+\lambda_w$, and using Darcy's law, Equation \eqref{eq:v2ph} becomes:
+\begin{align}\label{eq:pnw}
+&-\nabla \cdot (\lambda \nabla p_{nw})=q-\nabla[\lambda_w\nabla p_c+(\lambda_{nw}\rho_{nw}+\lambda_w\rho_w)g\nabla d],
+\end{align}
+which is an equation for the pressure of the non wetting phase. This equation depends on the saturation via the capillary pressure $p_c$ and the total mobility $\lambda$.\par
+Multiplying each phase velocity by the relative mobility of the other phase and subtracting the result we get:
+\begin{align}\label{eq:mobeq}
+&\lambda_{nw}\mathbf{v}_w-\lambda_w\mathbf{v}_{nw}=\lambda_w\lambda_{nw} [\nabla p_c+(\rho_w-\rho_{nw})g\nabla d].
+\end{align}
+Therefore, for the wetting phase velocity, $\mathbf{v}_w$, we have:
+\begin{align}\label{eq:vw}
+\mathbf{v}_w=\frac{\lambda_w}{\lambda}\mathbf{v}+\frac{\lambda_w\lambda_{nw}}{\lambda} [\nabla p_c+(\rho_w-\rho_{nw})g\nabla d].
+\end{align}
+We introduce the fractional flow function, 
+\begin{equation}\label{eq:fff}
+f_{w}(S_w)=\frac{\lambda_{w}(S_w)}{\lambda_{w}(S_w)+\lambda_{nw}(S_{nw})},
+\end{equation}
+which, together with the previously computed velocity $\mathbf{v}_w$, transforms the transport Equation \eqref{eq:mb2ph} to:
+\begin{equation}\label{eq:sw}
+ \phi\frac{\partial {S}_{w}}{\partial t}+\nabla \cdot [f_w( \mathbf{v}_w+\lambda_{nw}\Delta  \rho g\nabla d)]+\nabla \cdot(f_w\lambda_{nw}\nabla p_c)= q_w,
+\end{equation}
+where $\Delta \rho= \rho_w-\rho_{nw}.$ \par
+With this approach, the system is expressed in terms of the non wetting phase pressure, Equation \eqref{eq:pnw}, and the saturation of the wetting phase, Equation \eqref{eq:sw}.
+In the pressure equation,
+the coupling to saturation is present via the phase mobilities, Equation \eqref{eq:phm}, and the derivative of the capillary function. For the saturation, we have an indirect
+coupling with the pressure through the total Darcy velocity, Equation \eqref{eq:totv}. \par To solve the system, besides the governing equations, we need to define boundary conditions. The boundary conditions can be prescribed pressures 
+(Dirichlet conditions), flow rates (Neumann conditions) or a combination of these (Robin conditions).  Once we have the complete description of our system, we need to discretize it, the discretization methods used in this work are presented in the next section. 
+
+
+
+\section{Discretization methods}\label{sec:2}
+\hspace{0.5cm} In this work, we use the sequential scheme to simulate two-phase flow.
+With this approach, an unknown is fixed, e.g. the saturation of the wetting phase ($S_w$), and the resulting elliptic Equation \eqref{eq:pnw} is solved for the pressure of the non-wetting phase ($p_{nw}$). 
+Once $p_{nw}$ is computed, we update the total velocity ($\mathbf{v}$), Equation \eqref{eq:totv}, and solve the parabolic transport equation for $S_w$, Equation \eqref{eq:sw}. \par
+ The resulting system depends on space and time. The space derivatives are discretized using finite differences; for the temporal discretization we use the backward Euler method. Both discretization methods are presented in this section. 
+ In the examples presented in Section~\ref{sec:4}, the discretization is performed with the Matlab Reservoir Simulation Toolbox (MRST \cite{Lie13}).
+ \paragraph{Spatial discretization}
+%\hspace{0.5cm} 
+Using the sequential scheme, for a given time step $n$, we fix the wetting-phase saturation ($S_w^n$) and we compute the non-wetting phase pressure ($p_{nw}^n$), Equation \eqref{eq:pnw}. 
+The resulting equation contains only spatial derivatives, that are approximated using cell central differences scheme in a mesh with uniform size $\Delta x$, $\Delta y$, $\Delta z$. 
+We compute the pressure $p_{i,j,l}=p^n(x_i,y_j,z_l)$ at the center of the cell $(i,j,l)$, and the harmonic average of the mobility, $\lambda _{i-\frac{1}{2},j,l}=\lambda _{i-\frac{1}{2},j,l}(S^n)$, at the interface between cells $(i-1,j,l)$ and $(i,j,l)$. 
+The derivative in the $x$ direction becomes (see, e.g. \cite{Aziz79,Chen06,Jansen13,Diaz16}):
+\begin{align}\label{eq:diffx}
+&\frac{\partial}{\partial x}\left(\lambda \frac{\partial p_{nw}}{\partial x}\right) =\frac{ \lambda _{i+\frac{1}{2},j,l}(p_{i+1,j,l}-p_{i,j,l})-\lambda _{i-\frac{1}{2},j,l}(p_{i,j,l}-p_{i-1,j,l})}{\left( \Delta x\right)^2}+\mathscr{O}(\Delta x^2).
+\end{align}
+Defining the $transmissibility$, $T_{i-\frac{1}{2},j,l}$, between grid cells $(i-1,j,l)$ and $(i,j,l)$ as:
+\begin{equation}\label{eq:htrans}
+ T_{i-\frac{1}{2},j,l}=\frac{2\Delta y \Delta z}{\mu\Delta x}
+ \lambda_{i-\frac{1}{2},j,l},
+\end{equation}  
+together with boundary conditions, Equation \eqref{eq:pnw} is rewritten as:
+ \begin{equation}\label{eq:cel1}
+\mathbf{T}\mathbf{p}^n_{nw} = \mathbf{q},
+\end{equation}
+where $\mathbf{T}$ is known as the transmissibility matrix. This system is SPD; therefore, we use the CG method to solve it throughout this work. More information about CG is given in Section \ref{sec:4}.\par
+\paragraph{Well model} In reservoir simulation, besides boundary conditions, we can also have sources, that are fluids injected or extracted through wells or through boundaries. 
+To describe the injection or production through wells, we use the Peaceman well model. This model gives a linear relationship between the \emph{bhp} and the flow rate via the productivity or injectivity index ${I}_{(i,j,l)}$ of the well. This relationship is given by: 
+\begin{equation}\label{eq:wellm}
+{q}_{(i,j,l)}={I}_{(i,j,l)}({p}_{(i,j,l)}-{p}_{bh(i,j,l)}),
+\end{equation}
+for a cell $(i,j,l)$ that contains the well. In Equation \eqref{eq:wellm}, ${p}_{(i,j,l)}$ is the reservoir pressure in the cell containing the well
+and ${p}_{bh(i,j,l)}$ is a prescribed pressure inside the well.
+\paragraph{Incompressible fluid} Combining Equation \eqref{eq:cel1} with Equation \eqref{eq:wellm} we obtain:
+ \begin{equation}\label{eq:celw1}
+\mathbf{T}\mathbf{p}^n_{nw} = \mathbf{I}_w(\mathbf{p}^n_{nw}-\mathbf{p}^n_{bh}),
+\end{equation}
+where $\mathbf{I}_w$ is a diagonal matrix containing the productivity or injectivity indices of the wells present in the reservoir. 
+\paragraph{Temporal discretization} Once we have computed the pressure of the non-wetting phase ($p_{nw}$), we update the Darcy velocity ($\mathbf{v}^n$), Equation \eqref{eq:totv}. This velocity is then update in the transport Equation \eqref{eq:sw}. This equation depends on time; thus, we need to discretize the temporal derivative. This discretization can be performed using two schemes: implicit and explicit. \par In the explicit scheme, the time derivative is approximated using the fractional flow, mobilities, capillary pressure and Darcy velocity computed in the previous time step. After the update, the system reads:
+\begin{align}\label{eq:wsate}
+ &\phi\frac{( {S}_{w}^{n+1}-{S}_{w}^n)}{\Delta t}+\nabla \cdot [f_w({S}_{w}^n)( \mathbf{v}^n+\lambda_{nw}\Delta  \rho g\nabla z)]+\nabla \cdot(f_w({S}_{w}^n)\lambda_{nw}({S}_{w}^n)\nabla p_c({S}_{w}^n))= q_w^{n+1}.
+\end{align}
+For the implicit solution we use the backward Euler time discretization scheme that transforms Equation \eqref{eq:sw} into:
+\begin{align}\label{eq:wsati}
+ &\phi\frac{( {S}_{w}^{n+1}-{S}_{w}^n)}{\Delta t}+\nabla \cdot [f_w({S}_{w}^{n+1})( \mathbf{v}^n+\lambda_{nw}\Delta  \rho g\nabla z)]+\nabla \cdot(f_w({S}_{w}^{n+1})\lambda_{nw}({S}_{w}^{n+1})\nabla p_c({S}_{w}^{n+1}))= q_w^n,
+\end{align}
+or:
+\begin{align}\label{eq:wsati1}
+ &{S}_{w}^{n+1}-{S}_{w}^n-\frac{\Delta t}{\phi}\left(q_w-\nabla \cdot [f_w({S}_{w}^{n+1})( \mathbf{v}^n+\lambda_{nw}\Delta  \rho g\nabla z)]\right)
+ +\frac{\Delta t}{\phi}\left(\nabla\cdot(f_w({S}_{w}^{n+1})\lambda_{nw}({S}_{w}^{n+1})\nabla p_c({S}_{w}^{n+1}))\right)=0.
+\end{align}
+ If we use the implicit scheme, the resulting system is nonlinear, Equation \eqref{eq:wsati1}, and depends on the saturation at time steps $n$ and $n+1$. The nonlinear system can be solved using, e.g., the Newton-Raphson (NR) method. With this method, for the $(k+1)$-th iteration we have:
+ \begin{equation}\label{eq:NReq}
+ {J}({S}^k)\delta{S}^{k+1}=-{F}({S}^k,{S}^n),
+\qquad {S}^{k+1}={S}^k+\delta {S}^{k+1},
+ \end{equation}
+where ${J}({S}^k)=\frac{\partial {F}({S}^k,{S}^n)}{\partial {S}^k}$ is the 
+Jacobian matrix, $\delta {S}^{k+1}$ is the NR update at iteration step $k+1$ and ${F}({S}^k,{S}^n)$ is given by Equation \ref{eq:wsati1}. We solve Equation \ref{eq:NReq} for $\delta {S}^{k+1}$ and we update the saturation of the actual time step.
+Then, we compute the pressure for this time step $p^{n+1}_{nw}$, and we repeat the process for the rest of the time steps.  \par
+
+
+
+
+\section{Solution methods for linear systems}\label{sec:3}
+\hspace{0.5cm}Iterative techniques are preferred over direct methods to approximate the solution of ill-conditioned and large linear systems, being the CG preconditioned with IC a popular choice to solve SP(S)D systems. 
+ In this work, we study a further acceleration with deflation and POD techniques. In this section, we give a brief overview of these methods. 
+\paragraph{Conjugate Gradient (CG) Method} is a Krylov-subspace method used to solve systems with SPD matrices. 
+ The pseudo code for CG is given in Algorithm 2.\par
+ 
+\begin{minipage}{0.9\textwidth}
+\vspace{0.2cm}
+\begin{tabular}{ |l| } 
+\hline
+ \textbf{Algorithm 2.} Conjugate Gradient (CG) method,\\ solving $\mathbf{A}\mathbf{x}=\mathbf{b}$.\\
+ \hline
+\\
+Give an initial guess $\mathbf{x}^0$. \\Compute $\mathbf{r}^0=\mathbf{b}-\mathbf{A}\mathbf{x}^0$ and set $\mathbf{p}^0=\mathbf{r}^0$.\\
+
+\hspace{0.5cm}\textbf{for} $k=0,...,$ until convergence\\
+\hspace{1cm} $\alpha^k=\frac{(\mathbf{r}^{k},\mathbf{r}^{k})}{(\mathbf{A}\mathbf{p}^k,\mathbf{p}^k)}$\\
+\hspace{1cm} $\mathbf{x}^{k+1}=\mathbf{x}^k+\alpha^k\mathbf{p}^k$\\
+\hspace{1cm}$\mathbf{r}^{k+1}=\mathbf{r}^k-\alpha^k\mathbf{A}\mathbf{p}^k$\\
+\hspace{1cm}$ \beta^k=\frac{(\mathbf{r}^{k+1},\mathbf{r}^{k+1})}{(\mathbf{r}^k,\mathbf{r}^k)}$\\
+\hspace{1cm}$\mathbf{p}^{k+1}=\mathbf{r}^{k+1}+\beta^k\mathbf{p}^k$\\
+\hspace{0.5cm}\textbf{end}\\
+\hline
+\end{tabular}
+\end{minipage}
+
+\paragraph{Preconditioning} To accelerate the convergence of an iterative method, the linear system is multiplied by a matrix $\mathbf{M}^{-1}$ such that the iteration matrix has a better spectrum and $\mathbf{M}^{-1}\mathbf{b}$ is cheap to compute, the resulting  preconditioned system is:
+\begin{equation}\label{eq:precon}
+ \mathbf{M}^{-1}\mathbf{A}\mathbf{x}=\mathbf{M}^{-1}\mathbf{b}.
+\end{equation}
+
+\paragraph{Deflation} Sometimes, there are a few extreme eigenvalues hampering the convergence of an iterative method, with deflation \cite{Vuik99}, the effect of these eigenvalues can be annihilated. \par
+Given an $SPD$ matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$, the deflation matrix $\mathbf{P} \in \mathbb{R}^{n \times n}$ is defined as follows \cite{Tang08,Tang09}:
+\begin{equation}
+\mathbf{P}=\mathbf{I}-\mathbf{A}\mathbf{Q}, \quad \mathbf{Q}=\mathbf{Z}\mathbf{E}^{-1}\mathbf{Z}^T \quad \text{and} \quad \mathbf{E}=\mathbf{Z}^T\mathbf{A}\mathbf{Z},
+\end{equation}
+where 
+$\mathbf{E}\in \mathbb{R}^{m \times m}$ is known as the $Galerkin$ or $coarse$ matrix, the full rank matrix $\mathbf{Z}\in \mathbb{R}^{n\times m}$ is called the $deflation-subspace$ matrix, and it's columns are the
+$deflation$ vectors or $projection$ vectors. 
+These vectors have to be selected and, usually, a good selection depends on the problem. 
+The selection of deflation vectors is mainly based on approximated eigenvectors, 
+recycling solutions \cite{Clemens04,Diaz17}, subdomain deflation vectors \cite{Vuik02}, or multigrid and multilevel-based deflation matrices \cite{Tang09,Smith96}.
+
+\paragraph{Proper Orthogonal Decomposition (POD)} Essential system information is captured with POD in a small set of orthonormal basis vectors $\mathbf{\Psi}=[\psi_1 \text{ }\psi_2 \text{ }.. \text{ }\psi_l]$, $\mathbf{\Psi} \in \mathbb{R}^{n\times l}. $ This basis can be used to project a high-order model onto a space spanned by this basis.
+The basis vectors $\psi_i\in \mathbb{R}^n$ are computed from a set of 'snapshots', obtained by simulation or experiments \cite{Mark06}, $\mathbf{X}:=[\mathbf{x}_1,\mathbf{x}_2,...\mathbf{x}_m]$. These vectors $\{ \psi _j \} ^l _{j=1}$ are $l$ eigenvectors corresponding to 
+the largest eigenvalues $\{ \mathbf{\sigma} _j \} ^l _{j=1}$ of the data snapshot correlation matrix $\mathbf{R}\in \mathbb{R}^{n \times n}$,
+\begin{equation}\label{eq:POD}
+\mathbf{R}:= \frac{1}{m}\mathbf{X}\mathbf{X}^T \equiv \frac{1}{m} \sum_{i=1}^m \mathbf{x}_i \mathbf{x}_i^T.
+\end{equation}\par
+Ordering the eigenvalues  $\sigma_j$ from large to small, $\sigma_1$ being
+the largest, the basis consist on the eigenvalues of the $l$ eigenvalues satisfying \cite{Mark06}:
+\begin{equation}
+\frac{\sum_{j=1}^l\sigma_j}{\sum_{j=1}^m\sigma_j}\leq \alpha, \qquad 0<\alpha \leq 1,
+\end{equation}
+with $\alpha$ close to 1.   
+This basis contains almost all the system's variability; Therefore, the high-dimensional variable $\mathbf{x} \in \mathbb{R}^n$
+can be approximated by a linear combination of these basis vectors \cite{Astrid11}\footnote{In this study, we normalize the snapshots, so that $||\mathbf{x}_i||_2=1.$}:
+\begin{equation}\label{eq4}
+  \mathbf{x}\approx \sum_{i=1}^lc_i \mathbf{\psi}_i.
+\end{equation}
+
+\paragraph{POD-based deflation method}  We propose the reuse of a POD basis, $\mathbf{\Psi}$, as subspace-deflation matrix, $\mathbf{Z}$, in a deflation procedure. We implement the Deflated Preconditioned Conjugate Gradient method preconditioned with Incomplete Cholesky (DICCG). With deflation, we remove some of the eigenvalues of the system's matrix $\mathbf{A}_t$ that cause a slow convergence by making use the system's information contained in the POD basis. To obtain the basis, a set of snapshots, $\mathbf{X}$, is required. We propose a \emph{moving window} and a \emph{training simulation} approaches to obtain the snapshots.\par
+\emph{Moving window} We start the simulation by computing a set of $s$ snapshots and obtaining a POD basis from it. We solve the rest of the time steps with the DICCG method using the vectors of the POD basis as deflation vectors. The basis and, as a consequence, the deflation matrix is updated at each time step.  
+The pseudo code is given in Algorithm 3. Note that, with this approach, the first $s$ time steps are computed using the ICCG method. \par 
+\emph{Training simulation.} We run the simulation for all the time steps with the ICCG method. During this simulation (\emph{training phase}), we randomly vary the pressure in the production wells. A POD basis $\mathbf{\Psi}$ is computed from the solutions of the \emph{training phase}. Later, $\mathbf{\Psi}$ is used as deflation-subspace matrix to solve a series of problems with the same conditions, but with different pressures in the wells, i.e., different \emph{rhs}. The pseudo code is presented in Algorithm 4.  \par
+
+\begin{minipage}{0.45\textwidth}
+\vspace{0.2cm}
+\begin{tabular}{ |l | } 
+\hline
+\multicolumn{1}{|c|}{\textbf{Algorithm 3.} Deflation, moving window variant,}\\
+\multicolumn{1}{|c|}{ solving $\mathbf{A}_t\mathbf{x}_t=\mathbf{b}_t$.}\\
+\hline
+\footnotesize\% Compute the solution of the first s time\\ \footnotesize  steps with {ICCG}. \\
+\hspace{0.5cm}\textbf{for} $t=1,\quad ...,\quad s$ \\
+\hspace{1cm}$\mathbf{x}_t=\mathbf{A}_t^{-1}\mathbf{b}$\\
+\hspace{0.5cm}\textbf{end}\\
+\hspace{0.5cm}$X_{1:s}=\{x_1,x_2,...,x_{s}\}$\footnote{We define $X_{a:b}:=\{x_a,x_{a+1},...,x_{b}\}$.}  \\ 
+\footnotesize \% Compute the POD basis from the correlation \\
+\footnotesize matrix $\mathbf{R}$\footnote{$\mathbf{R}:= \frac{1}{s}\mathbf{X}\mathbf{X}^T$}. \\
+\hspace{1cm}$\mathbf{\Psi}_{1:s}= \{\psi_{1}, ... ,\psi_{s}\}$\\ 
+\footnotesize \% Compute the next solutions with {DICCG}.\\
+\hspace{0.5cm}\textbf{for} $t=s+1,\quad ...,\quad$ steps\\
+\hspace{1cm}$\mathbf{x}_t=\mathbf{A}_t^{-1}\mathbf{b}$\\
+\hspace{0.5cm}\textbf{end}\\
+\hline
+\end{tabular} 
+\end{minipage}%
+\hspace{0.5cm}
+\begin{minipage}{0.45\textwidth}
+\vspace{-0.7cm}
+\begin{tabular}{ |l | } 
+\hline
+ \multicolumn{1}{|c|}{\textbf{Algorithm 4.} Deflation, training variant,}\\
+ \multicolumn{1}{|c|}{ solving $\mathbf{A}_t\mathbf{x}_t=\mathbf{b}_t$.}\\
+ \hline
+ \footnotesize \%  Run a training phase simulation with {ICCG} \\\footnotesize varying the pressure in the wells.\\
+\hspace{0.5cm}\textbf{for} $t=1,\quad ...,\quad steps$ \\
+\hspace{1cm}$\mathbf{x}_t=\mathbf{A}_t^{-1}\mathbf{b}_t,\qquad \mathbf{b}_t= rand$\\
+\hspace{0.5cm}\textbf{end}\\
+ \hspace{0.5cm}$X_{1:steps}=\{x_1,x_2,...,x_{steps}\}$  \\ 
+ \footnotesize \% Compute the POD basis from the correlation \\
+ \footnotesize matrix $\mathbf{R}$\\
+ \hspace{1cm}$\mathbf{\Psi}_{1:s}= \{\psi_{1}, ... ,\psi_{s}\}$\\ 
+ \footnotesize \% Run the simulation with fixed pressures {DICCG}.\\
+ \hspace{0.5cm}\textbf{for} $t=1,\quad ...,\quad$ steps\\
+ \hspace{1cm}$\mathbf{x}_t=\mathbf{A}_t^{-1}\mathbf{b}_t$\\
+ \hspace{0.5cm}\textbf{end}\\
+\hline
+\end{tabular}
+\end{minipage}\par
+
+%\medskip
+We use this methodology to compute the solution of the  pressure, Equation \eqref{eq:pnw}. To analyze the method's performance, we compare the total number of iterations necessary to run the DICCG simulation with the total number of iterations necessary to solve the same problem using the non-deflated method (ICCG). \par
+The computational cost to solve one time step  with the ICCG method is $31 N$ for a 2D and $39N$ for a 3D problem of size $N$. For the DICCG method using $d$ deflation vectors the cost is $(31+4d)N$ for 2D and $(39+4d)N$ for 3D. Which implies that the DICCG method requires $\sim 1+ \frac{4d}{30}$ of ICCG operations for the 2D case, and $\sim 1+ \frac{d}{10}$ for the 3D case (see \cite{Diaz18_TU}). \par
+As tolerance or stopping criterion we use the relative residual, defined as the 2-norm of the residual of the $k^{th}$ iteration divided by 
+the 2-norm of the right-hand side of the preconditioned system, ${||\mathbf{M}^{-1}r^k||_2}\slash {||\mathbf{M}^{-1}b||_2}\leq \epsilon.$
+The tolerance of the solvers is presented for each case.\par
+
+\section*{Acknowledgments}
+
+\section*{References}
+
+
+
+\section*{\itshape Reference style}
+
+Text: All citations in the text should refer to:
+\begin{enumerate}
+\item Single author: the author's name (without initials, unless there
+is ambiguity) and the year of publication;
+\item Two authors: both authors' names and the year of publication;
+\item Three or more authors: first author's name followed by `et al.'
+and the year of publication.
+\end{enumerate}
+Citations may be made directly (or parenthetically). Groups of
+references should be listed first alphabetically, then chronologically.
+
+%%Vancouver style references.
+\bibliographystyle{model1-num-names}
+\bibliography{/home/wagm/cortes/Localdisk/Research/bib/research}
+
+\section*{Supplementary Material}
+
+Supplementary material that may be helpful in the review process should
+be prepared and provided as a separate electronic file. That file can
+then be transformed into PDF format and submitted along with the
+manuscript and graphic files to the appropriate editorial office.
+
+\end{document}
+
+%%
