@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.14)  15 FEB 2018 18:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.14)  16 FEB 2018 10:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -862,55 +862,188 @@ Underfull \hbox (badness 10000) in paragraph at lines 119--119
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
- <./elsevier-logo.pdf> <./jcomp-logo.pdf>]
+ <./elsevier-logo.pdf> <./jcomp-logo.pdf>] [2] [3] [4] [5] [6] [7]
+</home/wagm/cortes/Localdisk/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1
+cp0/def_0_pod_0/Permeability.jpg, id=47, 673.21075pt x 624.2222pt>
+File: /home/wagm/cortes/Localdisk/Results/2017/Report/bc/11/cp0/11/10-11_32nz1p
+erm_1cp0/def_0_pod_0/Permeability.jpg Graphic file (type jpg)
 
-LaTeX Warning: Reference `sec:4' on page 2 undefined on input line 174.
+<use /home/wagm/cortes/Localdisk/Results/2017/Report/bc/11/cp0/11/10-11_32nz1pe
+rm_1cp0/def_0_pod_0/Permeability.jpg>
+Package pdftex.def Info: /home/wagm/cortes/Localdisk/Results/2017/Report/bc/11/
+cp0/11/10-11_32nz1perm_1cp0/def_0_pod_0/Permeability.jpg used on input line 466
+.
+(pdftex.def)             Requested size: 116.82323pt x 108.3166pt.
+ [8 </home/wagm/cortes/Localdisk/Results/2017/Report/bc/11/cp0/11/10-11_32nz1pe
+rm_1cp0/def_0_pod_0/Permeability.jpg>]
+</mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def_1_p
+od_5/Pressure1.jpg, id=52, 1213.53375pt x 215.80624pt>
+File: /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/de
+f_1_pod_5/Pressure1.jpg Graphic file (type jpg)
 
-[2] [3]
+<use /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def
+_1_pod_5/Pressure1.jpg>
+Package pdftex.def Info: /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-1
+1_32nz1perm_1cp0/def_1_pod_5/Pressure1.jpg used on input line 534.
+(pdftex.def)             Requested size: 224.29858pt x 39.8873pt.
 
-LaTeX Warning: Reference `sec:4' on page 4 undefined on input line 281.
+</mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def_1_p
+od_5/Saturation1.jpg, id=53, 1082.0425pt x 206.7725pt>
+File: /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/de
+f_1_pod_5/Saturation1.jpg Graphic file (type jpg)
+
+<use /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def
+_1_pod_5/Saturation1.jpg>
+Package pdftex.def Info: /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-1
+1_32nz1perm_1cp0/def_1_pod_5/Saturation1.jpg used on input line 541.
+(pdftex.def)             Requested size: 224.29858pt x 42.8619pt.
+
+</mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def_1_p
+od_10/eig_pod1600.jpg, id=54, 704.6325pt x 550.055pt>
+File: /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/de
+f_1_pod_10/eig_pod1600.jpg Graphic file (type jpg)
+
+<use /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def
+_1_pod_10/eig_pod1600.jpg>
+Package pdftex.def Info: /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-1
+1_32nz1perm_1cp0/def_1_pod_10/eig_pod1600.jpg used on input line 607.
+(pdftex.def)             Requested size: 119.49564pt x 93.2815pt.
+
+Overfull \hbox (26.03848pt too wide) in paragraph at lines 607--608
+ [][] 
+ []
 
 
-LaTeX Warning: Reference `sec:4' on page 4 undefined on input line 300.
+</mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_6cp0/def_1_p
+od_10/eig_pod1600.jpg, id=55, 704.6325pt x 550.055pt>
+File: /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_6cp0/de
+f_1_pod_10/eig_pod1600.jpg Graphic file (type jpg)
 
-[4] [5] [6]
+<use /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_6cp0/def
+_1_pod_10/eig_pod1600.jpg>
+Package pdftex.def Info: /mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-1
+1_32nz1perm_6cp0/def_1_pod_10/eig_pod1600.jpg used on input line 613.
+(pdftex.def)             Requested size: 119.49564pt x 93.2815pt.
 
-Package natbib Warning: Citation `Diaz18_TU' on page 7 undefined on input line 
-452.
+Overfull \hbox (26.03848pt too wide) in paragraph at lines 613--615
+ [][] 
+ []
 
-(./jcomp-template_GD.bbl [7])
+[9 </mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def_
+1_pod_5/Pressure1.jpg> </mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11
+_32nz1perm_1cp0/def_1_pod_5/Saturation1.jpg> </mnt/sda2/cortes/Results/2017/Rep
+ort/bc/11/cp0/11/10-11_32nz1perm_1cp0/def_1_pod_10/eig_pod1600.jpg> </mnt/sda2/
+cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_6cp0/def_1_pod_10/eig_p
+od1600.jpg>] [10]
+</mnt/sda2/cortes/Results/2017/Report/bc/20def/10-11_32nz1perm_1cp1/def_1_pod_1
+1/eig_pod1600.jpg, id=62, 562.1pt x 421.575pt>
+File: /mnt/sda2/cortes/Results/2017/Report/bc/20def/10-11_32nz1perm_1cp1/def_1_
+pod_11/eig_pod1600.jpg Graphic file (type jpg)
 
-Package natbib Warning: There were undefined citations.
+<use /mnt/sda2/cortes/Results/2017/Report/bc/20def/10-11_32nz1perm_1cp1/def_1_p
+od_11/eig_pod1600.jpg>
+Package pdftex.def Info: /mnt/sda2/cortes/Results/2017/Report/bc/20def/10-11_32
+nz1perm_1cp1/def_1_pod_11/eig_pod1600.jpg used on input line 668.
+(pdftex.def)             Requested size: 122.34152pt x 91.75613pt.
 
-[8] (./jcomp-template_GD.aux)
+Underfull \hbox (badness 10000) in paragraph at lines 666--670
+[]
+ []
 
-LaTeX Warning: There were undefined references.
 
- ) 
+Overfull \hbox (28.88437pt too wide) in paragraph at lines 666--670
+[] 
+ []
+
+
+</mnt/sda2/cortes/Results/2017/Report/bc/20def/10-11_32nz1perm_6cp1/def_1_pod_1
+1/eig_pod1600.jpg, id=63, 562.1pt x 426.59375pt>
+File: /mnt/sda2/cortes/Results/2017/Report/bc/20def/10-11_32nz1perm_6cp1/def_1_
+pod_11/eig_pod1600.jpg Graphic file (type jpg)
+
+<use /mnt/sda2/cortes/Results/2017/Report/bc/20def/10-11_32nz1perm_6cp1/def_1_p
+od_11/eig_pod1600.jpg>
+Package pdftex.def Info: /mnt/sda2/cortes/Results/2017/Report/bc/20def/10-11_32
+nz1perm_6cp1/def_1_pod_11/eig_pod1600.jpg used on input line 675.
+(pdftex.def)             Requested size: 122.34152pt x 92.84848pt.
+
+Overfull \hbox (28.88437pt too wide) in paragraph at lines 675--676
+ [][] 
+ []
+
+
+</home/wagm/cortes/Localdisk/Results/2017/Report/bc/10def_2/10-11_32nz1perm_1cp
+1/def_1_pod_5/eig_pod1600.jpg, id=64, 562.1pt x 421.575pt>
+File: /home/wagm/cortes/Localdisk/Results/2017/Report/bc/10def_2/10-11_32nz1per
+m_1cp1/def_1_pod_5/eig_pod1600.jpg Graphic file (type jpg)
+
+<use /home/wagm/cortes/Localdisk/Results/2017/Report/bc/10def_2/10-11_32nz1perm
+_1cp1/def_1_pod_5/eig_pod1600.jpg>
+Package pdftex.def Info: /home/wagm/cortes/Localdisk/Results/2017/Report/bc/10d
+ef_2/10-11_32nz1perm_1cp1/def_1_pod_5/eig_pod1600.jpg used on input line 685.
+(pdftex.def)             Requested size: 122.34152pt x 91.75613pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 683--686
+[]
+ []
+
+
+Overfull \hbox (28.88437pt too wide) in paragraph at lines 683--686
+[] 
+ []
+
+
+</home/wagm/cortes/Localdisk/Results/2017/Report/bc/10def_2/10-11_32nz1perm_6cp
+1/def_1_pod_5/eig_pod1600.jpg, id=65, 562.1pt x 421.575pt>
+File: /home/wagm/cortes/Localdisk/Results/2017/Report/bc/10def_2/10-11_32nz1per
+m_6cp1/def_1_pod_5/eig_pod1600.jpg Graphic file (type jpg)
+
+<use /home/wagm/cortes/Localdisk/Results/2017/Report/bc/10def_2/10-11_32nz1perm
+_6cp1/def_1_pod_5/eig_pod1600.jpg>
+Package pdftex.def Info: /home/wagm/cortes/Localdisk/Results/2017/Report/bc/10d
+ef_2/10-11_32nz1perm_6cp1/def_1_pod_5/eig_pod1600.jpg used on input line 690.
+(pdftex.def)             Requested size: 122.34152pt x 91.75613pt.
+
+Overfull \hbox (28.88437pt too wide) in paragraph at lines 690--691
+ [][] 
+ []
+
+(./jcomp-template_GD.bbl [11 </mnt/sda2/cortes/Results/2017/Report/bc/20def/10-
+11_32nz1perm_1cp1/def_1_pod_11/eig_pod1600.jpg> </mnt/sda2/cortes/Results/2017/
+Report/bc/20def/10-11_32nz1perm_6cp1/def_1_pod_11/eig_pod1600.jpg> </home/wagm/
+cortes/Localdisk/Results/2017/Report/bc/10def_2/10-11_32nz1perm_1cp1/def_1_pod_
+5/eig_pod1600.jpg> </home/wagm/cortes/Localdisk/Results/2017/Report/bc/10def_2/
+10-11_32nz1perm_6cp1/def_1_pod_5/eig_pod1600.jpg>]) [12]
+(./jcomp-template_GD.aux) )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 546 ({)
+### bottom level 
 Here is how much of TeX's memory you used:
- 6251 strings out of 494317
- 86710 string characters out of 6163512
- 163429 words of memory out of 5000000
- 9399 multiletter control sequences out of 15000+600000
- 54410 words of font info for 134 fonts, out of 8000000 for 9000
+ 6345 strings out of 494317
+ 91839 string characters out of 6163512
+ 171652 words of memory out of 5000000
+ 9475 multiletter control sequences out of 15000+600000
+ 61237 words of font info for 151 fonts, out of 8000000 for 9000
  372 hyphenation exceptions out of 8191
- 39i,16n,38p,679b,324s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/t
-xfonts/rtxmi.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txex.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
-/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on jcomp-template_GD.pdf (8 pages, 256870 bytes).
+ 39i,16n,39p,1021b,350s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/txfonts/rtxmi.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/tx
+ex.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr
+8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on jcomp-template_GD.pdf (12 pages, 532567 bytes).
 PDF statistics:
- 94 PDF objects out of 1000 (max. 8388607)
- 65 compressed objects within 1 object stream
+ 119 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

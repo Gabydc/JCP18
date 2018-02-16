@@ -452,7 +452,252 @@ We use this methodology to compute the solution of the  pressure, Equation \eqre
 The computational cost to solve one time step  with the ICCG method is $31 N$ for a 2D and $39N$ for a 3D problem of size $N$. For the DICCG method using $d$ deflation vectors the cost is $(31+4d)N$ for 2D and $(39+4d)N$ for 3D. Which implies that the DICCG method requires $\sim 1+ \frac{4d}{30}$ of ICCG operations for the 2D case, and $\sim 1+ \frac{d}{10}$ for the 3D case (see \cite{Diaz18_TU}). \par
 As tolerance or stopping criterion we use the relative residual, defined as the 2-norm of the residual of the $k^{th}$ iteration divided by 
 the 2-norm of the right-hand side of the preconditioned system, ${||\mathbf{M}^{-1}r^k||_2}\slash {||\mathbf{M}^{-1}b||_2}\leq \epsilon.$
-The tolerance of the solvers is presented for each case.\par
+The tolerance of the solvers is presented for each case.
+
+\section{Numerical experiments: results and discussion}\label{sec:4}
+ We study the solution of systems of linear equations for the pressure resulting from water flooding for immiscible fluids (oil and water) flowing in highly heterogeneous 2D and 3D reservoirs. We include capillary pressure and gravity terms in some of the case studies. We use the fractional flow formulation to decouple pressure from saturation and we solve the resulting system with sequential schemes. The linear pressure system is obtained with MRST and solved using the proposed POD-based deflation procedure. The transport equation is solved with MRST using implicit schemes. 
+The models studied in this work are: an academic layered reservoir with a contrast in permeability coefficients up to $10^{6}$, and the SPE 10 benchmark with a contrast of $10^{7}$ \cite{Christie01}. \par
+\subsection{Heterogeneous permeability layers}\label{sec:4.1}
+In this section, we study water injection in an academic system consisting of equal-sized layers with a constant porosity field of 0.2 and different permeability values (see Figure~\ref{fig:rockperm1}). A set of layers with permeability $\kappa_1=1mD$ is followed by layers with permeability $\kappa_2 = 1$ or $6mD$. 
+The domain consists of a Cartesian grid of 32 x 32 cells in the 2D case, and 24 x 24 x 24 cells for the 3D case. For the relative permeability we use the Corey model, with exponents $n_w=n_{nw}=2$ (see Table~\ref{table:fluids}).  The first set of experiments do not consider gravity terms and capillary pressure. Later, we include capillary pressure, the relationship used is $P_c = C(1-S)$. 
+Finally, we study a 3D problem with gravity terms included. \par
+\begin{figure}
+%\begin{minipage}{.20\textwidth}
+  \includegraphics[width=0.25\textwidth]{/home/wagm/cortes/Localdisk/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def_0_pod_0/Permeability.jpg}
+\caption{Rock permeability}
+%\end{minipage}
+\label{fig:rockperm1}      
+\end{figure}
+We study water flooding with injection through the boundary and through wells.
+When using wells, one setup consists of one injector (I) and one producer (P) placed on opposite corners of the reservoir. For the second setup we place four producers ($P_i$) on the corners and one injector in the center. The wells are controlled prescribing the \emph{bhp}.\par
+The simulation is run during 4800 days with 240 time steps of 20 days (See Table \ref{table:ic}). The stopping criterium for the ICCG and DICCG methods is $\epsilon =5\cdot10^{-8}$.
+
+\begin{table}\small
+% table caption is above the table
+\caption{Fluids properties.}
+\label{table:fluids}    % Give a unique label
+% For LaTeX tables use
+\begin{tabular}{llll}
+
+\hline\noalign{\smallskip}
+&Water&Oil&Units\\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+$\mu$&     1&    10 & $cp$ \\
+$\rho$& 1000& 700& $kg/m^3$\\
+$k_r$&$(S_w)^2$&   $(1-S_w)^2$ \\
+\hline
+\hline
+ $C_p$&\multicolumn{2}{|c|}{$10*(1-S)$}&bars\\
+ \hline
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{table}
+
+
+
+
+\begin{table}
+% table caption is above the table
+\caption{Boundary conditions and temporal parameters.}
+\label{table:ic}      % Give a unique label
+% For LaTeX tables use
+\begin{tabular}{lll|lll}
+\hline\noalign{\smallskip}
+\multicolumn{3}{c|}{Temporal parameters}&\multicolumn{3}{c}{Boundary conditions}\\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+    $T_{total}$&     4800& days&$Q_{x=0}$&0.4&$m^3/day$\\
+    $T_{steps}$& 240&&$P_{0,x\neq (0, L_x)}$&100&$bars$\\
+$dT$& 20&days&$P_{x=L_x}$&0&$bars$\\
+\hline\noalign{\smallskip}
+
+\end{tabular}
+\end{table}
+
+
+
+
+\newpage
+
+
+\subsubsection{Injection through the left boundary}\label{sec:5.1.1} 
+Injection is performed through the left boundary at a rate of $0.4$ $m^3/day$. The pressure is set as zero at the right boundary and 100 bars inside the reservoir (See Table \ref{table:ic}).\par
+The pressure field and the water saturation are presented in Figure \ref{fig:p1} and Figure \ref{fig:s1} for various times. We observe that the pressure is larger on the boundary where water is injected and it decreases towards the right boundary. We note that the water flows easily through the layers with higher permeability.\par
+% \begin{figure}
+% \includegraphics[width=17cm,height=17cm,keepaspectratio]
+% {/mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def_1_pod_5/Pressure1.jpg}
+% \caption{Pressure field [bars] for various times, for a contrast between permeability values of $10^{1}$, 32 x 32 grid cells.}
+% \label{fig:p1}   
+% \end{figure}
+
+\begin{figure}
+\includegraphics[width=0.48\textwidth]
+{/mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def_1_pod_5/Pressure1.jpg}
+\caption{Pressure field [bars] for various times, for a contrast between permeability values of $10^{1}$, 32 x 32 grid cells.}
+\label{fig:p1}   
+\end{figure}
+\vspace{-0.05cm}
+\begin{figure}
+\includegraphics[width=0.48\textwidth]
+{/mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def_1_pod_5/Saturation1.jpg}
+\caption{Water saturation for various times, for a contrast between permeability values of $10^{1}$, 32 x 32 grid cells.}
+\label{fig:s1}
+\end{figure}
+
+ The number of iterations necessary to achieve convergence is summarized in Table \ref{table:liter1}. The first column contains the contrast between permeability layers ({${\kappa_1}/{\kappa_2}$). In the second, we present the number of deflation $d$ vectors used. The third column shows the number of iterations necessary to achieve convergence with the ICCG method only. The number of iterations necessary to compute the snapshots with the DICCG method is presented in the 4th and 5th columns (DICCG). For this examples we use the \emph{moving window} approach. Therefore, it is required to compute the first $d$ snapshots with ICCG (fourth column), the rest of the time steps are computed with DICCG (fifth column). The total number of iterations needed to perform the DICCG method ($d$ time steps computed with ICCG + Total-$d$ computed with DICCG) are presented in the sixth column. In the last column, we compute the percentage of DICCG iterations with respect to  ICCG.\par
+  A reduction to around $15\%$ the number of ICCG iterations was achieved with the DICCG method for most of the cases (see Table \ref{table:liter1}). This reduction is similar when we use a contrast in permeability layers of $10^ 1$ or $10^ 6$.\par
+ % For tables use
+\begin{table}\small
+% table caption is above the table
+\caption{Number of iterations. Injection through the left boundary.}\label{table:liter1}       % Give a unique label
+\begin{tabular}{lllllll}
+\hline\noalign{\smallskip}
+ $\frac{\kappa_2}{\kappa_1}$ &d &Total& \multicolumn{2}{c}{DICCG} &Total&\% of \\ 
+      &   & ICCG     &  ICCG&DICCG &DICCG& ICCG\\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\multicolumn{7}{c}{No capillary pressure included, 2D}\\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+$10^{1}$& ${10}$ &14783&605&1270&1875&13 \\ 
+\hline  
+$10^{1}$& ${5}$ &14783&605&1573&2178&15 \\ 
+\hline    
+$10^{6}$& ${10}$ &9735&442&1163&1605&16 \\ 
+\hline  
+$10^{6}$&${5}$ &9735&442&1317&1759&18 \\
+\hline\noalign{\smallskip}
+\multicolumn{7}{c}{Capillary pressure included, 2D}\\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+$10^{1}$ & $10$&14597&600&2843&3443&24 \\ 
+\hline  
+$10^{1}$ & $5$&14597&600&3072&3672&25 \\ 
+\hline 
+$10^{6}$ & $10$&9071&428&3156&3584&40 \\ 
+\hline  
+$10^{6}$ & $5$&9071&428&2644&3072&34 \\ 
+\hline\noalign{\smallskip}
+\multicolumn{7}{c}{No capillary pressure included, 3D}\\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+ $10^{1}$ & $10$&17496&656&1800&2456&14 \\ 
+\hline  
+$10^{1}$ & $5$&17496&656&2170&2826&16 \\ 
+\hline  
+$10^{6}$ & $10$&15720&486&1972&2458&16 \\ 
+\hline  
+$10^{6}$ & $5$&15720&486&2121&2607&17 \\ 
+\hline\noalign{\smallskip}
+\multicolumn{7}{c}{Capillary pressure included, 3D}\\
+\noalign{\smallskip}\hline\noalign{\smallskip}  
+$10^{1}$ & ${10}$&17224&660&3431&4091&24 \\ 
+\hline  
+$10^{1}$ & ${5}$&17224&660&3658&4318&25 \\  
+\hline 
+$10^{6}$ & ${10}$&13228&469&3531&4000&30 \\ 
+\hline  
+$10^{6}$ & ${5}$&13228&469&2992&3461&26 \\ 
+\hline\noalign{\smallskip}
+\end{tabular}
+\end{table}
+
+ In Figure \ref{fig:e1}, we note that a contrast on the permeability layers of $10^1$ or $10^6$ results in five eigenvalues significantly larger than the rest. Therefore, if we use five instead of ten POD basis vectors as deflation vectors the results are similar, as noted in Table \ref{table:liter1}. For the case with higher contrast, the spectrum of the correlation matrix is slightly more spread, which could explain the minor increase in the number of iterations. \par
+ 
+ \begin{figure}
+\begin{minipage}{.20\textwidth}
+% \vspace{0.3cm}
+\centering
+\includegraphics[width=4.2cm,height=4.2cm,keepaspectratio]
+{/mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_1cp0/def_1_pod_10/eig_pod1600.jpg}
+\end{minipage}%
+\hspace{0.3cm}
+\begin{minipage}{.20\textwidth}
+\centering
+\includegraphics[width=4.2cm,height=4.2cm,keepaspectratio]
+{/mnt/sda2/cortes/Results/2017/Report/bc/11/cp0/11/10-11_32nz1perm_6cp0/def_1_pod_10/eig_pod1600.jpg}
+% \vspace{-0.5cm}
+\end{minipage}
+\caption{Eigenvalues of the correlation matrix $\mathbf{R}=\frac{1}{m}\mathbf{X}\mathbf{X}^T$ for a contrast between permeability values of $10^{1}$ and $10^{6}$.}
+\label{fig:e1}
+\end{figure}
+
+\paragraph{Capillary pressure case.} The results show that the capillary pressure influences the performance of the DICCG method increasing the number of iterations required to find an approximate solution (see Table \ref{table:liter1}). To further investigate the performance of the DICCG method, we study two cases. In the first one, we increase the number of 
+deflation vectors to 20. For the second one, we use a smaller time step (half of the previous) using five and ten deflation vectors. The results are presented in Table \ref{table:liter2}. \par
+
+\begin{table}\small
+\caption{Number of iterations. Capillary pressure examples.}\label{table:liter2} 
+\begin{tabular}{lllllll}
+\hline\noalign{\smallskip}
+ $\frac{\kappa_2}{\kappa_1}$ &d &Total& \multicolumn{2}{c}{DICCG} &Total&\% of \\ 
+      &   & ICCG     &  ICCG&DICCG &DICCG& ICCG\\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\multicolumn{7}{c}{Capillary pressure included, 2D}\\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+$10^{1}$ & $10$&14597&600&2843&3443&24 \\ 
+\hline  
+$10^{1}$ & $5$&14597&600&3072&3672&25 \\ 
+\hline 
+$10^{6}$ & $10$&9071&428&3156&3584&40 \\ 
+\hline  
+$10^{6}$ & $5$&9071&428&2644&3072&34 \\ 
+\noalign{\smallskip}\hline \noalign{\smallskip}
+\multicolumn{7}{c}{Capillary pressure included, 2D, 20 dv}\\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+$10^{1}$ & $20$&14597&1210&2347&3557&24 \\ 
+\hline  \noalign{\smallskip}
+$10^{1}$ & $11$&14597& 1210&2486&3696&25 \\ 
+\hline  \noalign{\smallskip}
+$10^{6}$ & $20$&9071& 837&3229&4066&45 \\ 
+\hline  \noalign{\smallskip}
+$10^{6}$ & $11$&9071& 837&2927&3764&41 \\  
+\hline\noalign{\smallskip}
+\multicolumn{7}{c}{Capillary pressure included, 2D, smaller time step}\\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+$10^{1}$ &$10$&29187&585&4166&4751&16 \\ 
+\hline  \noalign{\smallskip}
+$10^{1}$ & $5$&29187&585&4463&5048&17 \\ 
+\hline \noalign{\smallskip}
+$10^{6}$ & $10$&18400&393&4623&5016&27 \\ 
+\hline  \noalign{\smallskip}
+$10^{6}$ & $5$&18400&393&4005&4398&24 \\ 
+\hline\noalign{\smallskip}
+\end{tabular}
+\end{table}
+If we increase the number of deflation vectors, the performance of the DICCG method does not change considerably (see Table \ref{table:liter2}). Therefore, we cannot conclude that the number of deflation vectors has a direct influence on the behavior of the method. This can be explained from the spectrum of the correlation matrix (see Figure \ref{fig:eigbcdv}). The range of the spectrum is similar for ten or twenty basis vectors. Therefore, the information captured in both cases is basically the same and the performance of the method does not differ.  \par
+\begin{figure}
+
+\begin{minipage}{.20\textwidth}
+\hspace{0.2cm}
+\includegraphics[width=4.3cm,height=4.3cm,keepaspectratio]
+{/mnt/sda2/cortes/Results/2017/Report/bc/20def/10-11_32nz1perm_1cp1/def_1_pod_11/eig_pod1600.jpg}
+%\vspace{-0.5cm}
+\end{minipage}
+\hspace{0.3cm}
+\begin{minipage}{.20\textwidth}
+
+\centering
+\includegraphics[width=4.3cm,height=4.3cm,keepaspectratio]{/mnt/sda2/cortes/Results/2017/Report/bc/20def/10-11_32nz1perm_6cp1/def_1_pod_11/eig_pod1600.jpg}
+\end{minipage}
+\caption{Eigenvalues of the correlation matrix $\mathbf{R}=\frac{1}{m}\mathbf{X}\mathbf{X}^T$ for a contrast between permeability values of $10^{1}$ and $10^{6}$, 20 deflation vectors.}
+\label{fig:eigbcdv}
+\end{figure}
+
+\begin{figure}
+\begin{minipage}{.20\textwidth}
+\hspace{0.2cm}
+\includegraphics[width=4.3cm,height=4.3cm,keepaspectratio]
+{/home/wagm/cortes/Localdisk/Results/2017/Report/bc/10def_2/10-11_32nz1perm_1cp1/def_1_pod_5/eig_pod1600.jpg}
+\end{minipage}
+\hspace{0.3cm}
+\begin{minipage}{.20\textwidth}
+\centering
+\includegraphics[width=4.3cm,height=4.3cm,keepaspectratio]{/home/wagm/cortes/Localdisk/Results/2017/Report/bc/10def_2/10-11_32nz1perm_6cp1/def_1_pod_5/eig_pod1600.jpg}
+\end{minipage}
+\caption{Eigenvalues of the correlation matrix $\mathbf{R}=\frac{1}{m}\mathbf{X}\mathbf{X}^T$ for a contrast between permeability values of $10^{1}$ and $10^{6}$, 480 time steps.}
+\label{fig:eigbcts}
+\end{figure}
+However, if we use 480 time steps instead of the 240 of the previous cases, we observe that the DICCG method performs better. If the time step is smaller, the matrix $\mathbf{A}$ has less variation during each time step. The smallest eigenvalue of the correlation matrix for this problem is $10^{-15}$ for a contrast of $10^1$ and $10^{-17}$ for a contrast of $10^6$ (see Figure \ref{fig:eigbcts}). Therefore, the difference between these values is the same as in the previous cases, but the smallest value is smaller than in the previous cases, which appears to result in a better performance.\par
+From these experiments, we observe that the performance of the DICCG method depends on the time step, i.e., the variation in the matrix $\mathbf{A}$. This can be linked to the information acquired with the snapshots. For the case without capillary pressure, the time step used is enough to capture the system behavior. On the contrary, including capillary pressure, smaller changes produced in the system have to be considered, which can be done by taking smaller time steps.\par
+
+
+
+
 
 \section*{Acknowledgments}
 

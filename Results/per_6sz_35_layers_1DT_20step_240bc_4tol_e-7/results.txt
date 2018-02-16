@@ -1,0 +1,32 @@
+\begin{table}\small\centering
+\caption{Number of iterations.}\label{table:it_}   
+ \begin{tabular}{lllllll}
+\hline\noalign{\smallskip} 
+ $\frac{\kappa_2}{\kappa_1}$ &d &Total& \multicolumn{2}{c}{DICCG} & Total & \% of \\ 
+       &   & ICCG     &  ICCG&DICCG &DICCG& ICCG \\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+$10^{6} $&10&6211&6211& 0 &6211&1\\ 
+\hline 
+$10^{6} $&10&6211&139&1311&1450&23\\ 
+$10^{6} $&10&6211&6211& 0 &6211&1\\ 
+\hline 
+$10^{6} $&10&6211&139&1311&1450&23\\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\multicolumn{7}{c}{POD vectors}\\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\multicolumn{7}{c}{ POD  deflation vectors}\\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\hline  
+$10^{6} $&5&6211&139&1391&1530&25\\ 
+$10^{6} $&10&6211&6211& 0 &6211&1\\ 
+\hline 
+$10^{6} $&10&6211&139&1311&1450&23\\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\multicolumn{7}{c}{POD vectors}\\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\multicolumn{7}{c}{ POD  deflation vectors}\\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\hline  
+$10^{6} $&5&6211&139&1391&1530&25\\ 

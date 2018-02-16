@@ -1,4 +1,4 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{29}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -191,5 +191,20 @@
   decomposition: parallel multilevel methods for elliptic partial differential
   equations.}}, \bibinfo{publisher}{Cambridge University Press New York},
   \bibinfo{year}{1996}.
+%Type = Techreport
+\bibitem[{{G.B. Diaz Cortes, C. Vuik and J.D. Jansen}(2018)}]{Diaz18_TU}
+\bibinfo{author}{{G.B. Diaz Cortes, C. Vuik and J.D. Jansen}},
+  \bibinfo{title}{{POD-based deflation techniques for the solution of two-phase
+  flow problems in large and highly heterogeneous porous media.}},
+  \bibinfo{type}{{Report}} \bibinfo{number}{{18-1}}, { Delft University of
+  Technology, Delft Institute of Applied Mathematics},
+  \bibinfo{address}{{Delft}}, \bibinfo{year}{{2018}}.
+%Type = Article
+\bibitem[{{M.A. Christie and M.J. Blunt}(2001)}]{Christie01}
+\bibinfo{author}{{M.A. Christie and M.J. Blunt}},
+\newblock \bibinfo{title}{{Tenth SPE Comparative Solution Project: a Comparison
+  of Upscaling Techniques.}},
+\newblock \bibinfo{journal}{{SPE Reservoir Engineering and Evaluation}}
+  \bibinfo{volume}{{4}} (\bibinfo{year}{{2001}}) \bibinfo{pages}{{308--317}}.
 
 \end{thebibliography}

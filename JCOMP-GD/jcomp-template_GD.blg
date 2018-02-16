@@ -3,47 +3,45 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: jcomp-template_GD.aux
 The style file: model1-num-names.bst
 Database file #1: /home/wagm/cortes/Localdisk/Research/bib/research.bib
-Warning--I didn't find a database entry for "Diaz18_TU"
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 27 entries,
+You've used 29 entries,
             2910 wiz_defined-function locations,
-            828 strings with 9943 characters,
-and the built_in function-call counts, 12928 in all, are:
-= -- 943
-> -- 270
-< -- 31
-+ -- 108
-- -- 81
-* -- 1292
-:= -- 1943
-add.period$ -- 27
-call.type$ -- 27
-change.case$ -- 153
-chr.to.int$ -- 27
-cite$ -- 27
-duplicate$ -- 1016
-empty$ -- 1133
-format.name$ -- 108
-if$ -- 2436
+            841 strings with 10350 characters,
+and the built_in function-call counts, 13890 in all, are:
+= -- 1013
+> -- 290
+< -- 34
++ -- 116
+- -- 87
+* -- 1394
+:= -- 2085
+add.period$ -- 29
+call.type$ -- 29
+change.case$ -- 164
+chr.to.int$ -- 29
+cite$ -- 29
+duplicate$ -- 1096
+empty$ -- 1213
+format.name$ -- 116
+if$ -- 2614
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 212
-newline$ -- 128
-num.names$ -- 108
-pop$ -- 299
+missing$ -- 228
+newline$ -- 136
+num.names$ -- 116
+pop$ -- 318
 preamble$ -- 1
-purify$ -- 162
+purify$ -- 174
 quote$ -- 0
-skip$ -- 329
+skip$ -- 352
 stack$ -- 0
-substring$ -- 727
-swap$ -- 664
-text.length$ -- 4
+substring$ -- 778
+swap$ -- 721
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 216
+type$ -- 234
 warning$ -- 0
-while$ -- 103
+while$ -- 110
 width$ -- 0
-write$ -- 351
-(There was 1 warning)
+write$ -- 377

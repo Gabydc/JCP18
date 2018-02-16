@@ -1,0 +1,13 @@
+\begin{table}\small\centering
+\caption{Number of iterations.}\label{table:it_}   
+ \begin{tabular}{lllllll}
+\hline\noalign{\smallskip} 
+ $\frac{\kappa_2}{\kappa_1}$ &d &Total& \multicolumn{2}{c}{DICCG} & Total & \% of \\ 
+       &   & ICCG     &  ICCG&DICCG &DICCG& ICCG \\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+$10^{6} $&10&7049&7049& 0 &7049&1\\ 
+\hline 
+$10^{6} $&10&7049&533&1433&1966&28\\ 
+$10^{6} $&10&6369&6369& 0 &6369&1\\ 
+\hline 
+$10^{6} $&10&6369&446&1433&1879&30\\ 

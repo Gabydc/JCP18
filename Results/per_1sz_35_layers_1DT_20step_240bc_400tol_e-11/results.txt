@@ -1,0 +1,10 @@
+\begin{table}\small\centering
+\caption{Number of iterations.}\label{table:it_}   
+ \begin{tabular}{lllllll}
+\hline\noalign{\smallskip} 
+ $\frac{\kappa_2}{\kappa_1}$ &d &Total& \multicolumn{2}{c}{DICCG} & Total & \% of \\ 
+       &   & ICCG     &  ICCG&DICCG &DICCG& ICCG \\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+$10^{1} $&10&13291&13291& 0 &13291&1\\ 
+\hline 
+$10^{1} $&10&13291&639&7566&8205&62\\ 

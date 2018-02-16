@@ -1,0 +1,29 @@
+\begin{table}\small\centering
+\caption{Number of iterations.}\label{table:it_}   
+ \begin{tabular}{lllllll}
+\hline\noalign{\smallskip} 
+ $\frac{\kappa_2}{\kappa_1}$ &d &Total& \multicolumn{2}{c}{DICCG} & Total & \% of \\ 
+       &   & ICCG     &  ICCG&DICCG &DICCG& ICCG \\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+$10^{1} $&10&8439&8439& 0 &8439&1\\ 
+\hline 
+$10^{1} $&10&8439&500&2044&2544&30\\ 
+\hline 
+$10^{1} $&10&8439&500&1458&1958&23\\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\multicolumn{7}{c}{POD vectors}\\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\multicolumn{7}{c}{ POD  deflation vectors}\\ 
+\noalign{\smallskip}\hline\noalign{\smallskip}
+\hline  
+$10^{1} $&3&8439&500&1970&2470&29\\ 
+$10^{1} $&10&10491&10491& 0 &10491&1\\ 
+\hline 
+$10^{1} $&10&10491&558&1555&2113&20\\ 
+$10^{1} $&10&9265&9265& 0 &9265&1\\ 
+\hline 
+$10^{1} $&10&9265&546&1926&2472&27\\ 
+$10^{1} $&10&10732&10732& 0 &10732&1\\ 
+\hline 
+$10^{1} $&10&10732&559&1708&2267&21\\ 
